@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
+:root {
+  --brown: #271207;
+  --light-brown: #847770;
+  --lighter-brown: #cebcb1;
+  --soft-orange: #e7c73c;
+  --soft-yellow: #f1e876;
+  --grayish-blue-var: 233, 8%, 79%;
+  --dark-grayish-blue: hsl(236, 13%, 42%);
+  --dark-grayish-blue-var: 236, 13%, 42%;
+  --very-dark-blue: #040403;
+  --fw-regular: 400;
+  --fw-bold: 700;
+  --fw-extra-bold: 800;
+  --fs-400: 1rem;
+  --fs-500: 1.3rem;
+  --fs-550: 1.4rem;
+  --fs-600: 2.75rem;
+  --fs-700: 4.5rem;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Merriweather', serif;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  filter: sepia(100%);
+}
+
+
+main {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+header {
+  justify-content: space-between;
+  padding: 2.5em 3rem;
+  background-color: var(--light-brown);
+
+}
+
+.navbar {
+  justify-content: space-between;
+}
+
+.logo {
+  width: 6em;
+  height: 4em;
+}
+
+.nav ul {
+  list-style: none;
+  gap: 4rem;
+  margin: 0 5rem 0 0;
+}
+
+.link {
+  font-size: 32px;
+  text-decoration: none;
+  color: #040403;
+  font-weight: 700;
+  position: relative;
+}
+
+.link::before {
+  content: '';
+  background-color: hsla(52, 100%, 50%, 0.75);
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  width: 3.9em;
+  height: 5px;
+  z-index: 0;
+  transition: all .2s ease;
+}
+
+.link:hover , a:hover::before {
+  bottom: 0;
+  height: 100%;
+}
+
+@media (max-width: 850px) {
+  main {
+    width: 20%;
+    transform: translateX(0%);
+    position: absolute;
+  }
+
+  header {
+    flex-direction: column;
+    padding: 2.5em 1.5em;
+    height: 100vh;
+  }
+
+  .logo {
+    margin-bottom: 2em;
+  }
+
+  .navbar, .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .link::before {
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.15em;
+    height: 1.75em;
+  }
+
+  .link:hover::before {
+    width: 130px;
+    height: 30%;
+    transform: translateY(50%);
+  }
+}
+
+@media (max-width: 670px) {
+
+  .logo {
+    width: 4em;
+    height: 3em;
+  }
+  .nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    gap: 100px;
+    transform: translateX(-15%);
+    transition: transform 0.4s ease;
+  }
+
+  li {
+    transform: rotate(-90deg);
+  }
+
+}

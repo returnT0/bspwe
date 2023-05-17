@@ -1,0 +1,31 @@
+<main>
+  <header class="navbar" style="background-color:#847770;">
+    <div class="navbar flex">
+      <img class="logo" ngSrc="../../assets/logo.svg" alt="Company Logo" height="40" width="65">
+<!--      <img class="menu-btn" ngSrc="../../assets/icon-menu.svg" alt="burger" height="17" width="40">-->
+    </div>
+    <nav class="nav">
+      <ul class="flex">
+<!--        <img class="menu-btn" ngSrc="../../assets/icon-menu-close.svg" alt="" height="31" width="32">-->
+        <li>
+          <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link"
+             routerLinkActive="active">domain.</a>
+        </li>
+        <li>
+          <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link" routerLink="/home"
+             routerLinkActive="active">home.</a>
+        </li>
+        <li>
+          <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link" routerLink="/profile"
+             routerLinkActive="active">profile.</a>
+        </li>
+        <li>
+          <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link"
+             routerLinkActive="active">logout.</a>
+        </li>
+
+      </ul>
+    </nav>
+  </header>
+</main>
+

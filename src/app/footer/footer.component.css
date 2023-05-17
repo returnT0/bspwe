@@ -1,0 +1,36 @@
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: #f5f5f5;
+}
+
+.social {
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.social a {
+  color: #e7c73c;
+  text-decoration: none;
+}
+
+.social a:hover {
+  color: #e7c73c;
+  opacity: 0.8;
+}
+
+.copyright {
+  font-size: 18px;
+  color: #040403;
+  text-decoration: none;
+}
+
+@media (max-width: 850px) {
+  footer {
+    display: none;
+  }
+}
