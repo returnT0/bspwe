@@ -1,7 +1,7 @@
 <main>
   <header class="navbar" style="background-color:#847770;">
     <div class="navbar flex">
-      <img class="logo" ngSrc="../../assets/logo.svg" alt="Company Logo" height="40" width="65">
+      <img class="logo" src="../../assets/logo.svg" alt="Company Logo" height="40" width="65">
 <!--      <img class="menu-btn" ngSrc="../../assets/icon-menu.svg" alt="burger" height="17" width="40">-->
     </div>
     <nav class="nav">
@@ -15,7 +15,6 @@
           <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link" routerLink="/home"
              routerLinkActive="active">home.</a>
         </li>
-
         <li>
           <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link" routerLink="/profile"
              routerLinkActive="active">profile.</a>

@@ -13,12 +13,12 @@ footer {
   gap: 2em;
 }
 
-.social a {
+.social i {
   color: #e7c73c;
   text-decoration: none;
 }
 
-.social a:hover {
+.social i:hover {
   color: #e7c73c;
   opacity: 0.8;
 }

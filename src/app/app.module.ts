@@ -35,7 +35,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     NgbModule,
-    NgOptimizedImage,
   ],
   providers: [],
   bootstrap: [AppComponent]
