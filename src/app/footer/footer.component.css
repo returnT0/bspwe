@@ -2,10 +2,12 @@ footer {
   position: fixed;
   width: 100%;
   bottom: 0;
-  background-color: #f5f5f5;
+  background-color: #f7f7f7;
+  font-family: 'Wix Madefor Display', sans-serif;
 }
 
 .social {
+  height: 20px;
   font-size: 22px;
   display: flex;
   justify-content: center;
@@ -14,19 +16,21 @@ footer {
 }
 
 .social i {
-  color: #e7c73c;
+  color: #fc2535;
+  opacity: 0.8;
   text-decoration: none;
 }
 
 .social i:hover {
-  color: #e7c73c;
-  opacity: 0.8;
+  color: #ff0013;
+  opacity: 1;
 }
 
 .copyright {
   font-size: 18px;
   color: #040403;
   text-decoration: none;
+  opacity: 0.7;
 }
 
 @media (max-width: 850px) {

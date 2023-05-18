@@ -1,31 +1,42 @@
 <main>
-  <header class="navbar" style="background-color:#847770;">
+  <header class="navbar" style="background-color: #f7f7f7;">
     <div class="navbar flex">
-      <img class="logo" src="../../assets/logo.svg" alt="Company Logo" height="40" width="65">
-<!--      <img class="menu-btn" ngSrc="../../assets/icon-menu.svg" alt="burger" height="17" width="40">-->
+      <a [routerLinkActiveOptions]="{exact: true}" class="link" routerLink="/home"
+         routerLinkActive="active"><img class="logo" src="../../assets/air-logo.png" alt="Company Logo">
+      </a>
     </div>
     <nav class="nav">
+      <div class="cloud">
       <ul class="flex">
-<!--        <img class="menu-btn" ngSrc="../../assets/icon-menu-close.svg" alt="" height="31" width="32">-->
-        <li>
-          <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link"
-             routerLinkActive="active">domain.</a>
-        </li>
         <li>
           <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link" routerLink="/home"
-             routerLinkActive="active">home.</a>
+             routerLinkActive="active">home</a>
         </li>
         <li>
-          <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link" routerLink="/profile"
-             routerLinkActive="active">profile.</a>
+          <h3>|</h3>
         </li>
         <li>
           <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link"
-             routerLinkActive="active">logout.</a>
+             routerLinkActive="active">domains</a>
         </li>
-
+        <li>
+          <h3>|</h3>
+        </li>
+        <li>
+          <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" class="link"
+             routerLinkActive="active">about</a>
+        </li>
       </ul>
+      </div>
     </nav>
+    <div class="navbar flex">
+      <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" routerLink="/profile" class="icon"
+         routerLinkActive="active"><img class="user" src="../../assets/user.png" alt="Company Logo">
+      </a>
+      <a (click)="logout()" [routerLinkActiveOptions]="{exact: true}" routerLink="/profile" class="icon"
+         routerLinkActive="active"><img class="exit" src="../../assets/image-removebg-preview.png" alt="Company Logo">
+      </a>
+    </div>
   </header>
 </main>
 
