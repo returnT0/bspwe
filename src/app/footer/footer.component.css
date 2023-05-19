@@ -27,14 +27,8 @@ footer {
 }
 
 .copyright {
-  font-size: 18px;
+  font-size: 14px;
   color: #040403;
   text-decoration: none;
   opacity: 0.7;
-}
-
-@media (max-width: 850px) {
-  footer {
-    display: none;
-  }
 }

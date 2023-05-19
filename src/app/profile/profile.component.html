@@ -1,2 +1,38 @@
-<p>profile works!</p>
-<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+<div class="container">
+  <div class="card">
+    <div class="profile">
+      <div class="image">
+        <i class="fa fa-user-o" aria-hidden="true"></i>
+      </div>
+      <div class="profile-details">
+        <form>
+          <div class="names">
+            <input type="text" [(ngModel)]="user.firstName"
+                   class="form-control firstname" id="userFirstName"
+                   placeholder="John..." value="{{user.firstName}}" [ngModelOptions]="{standalone:true}">
+            <input type="text" [(ngModel)]="user.lastName" class="form-control lastname"
+                   id="userLastName" placeholder="Doe..." value="{{user.lastName}}"
+                   [ngModelOptions]="{standalone:true}">
+          </div>
+          <input type="text" [(ngModel)]="user.address" class="form-control"
+                 id="userAddress" placeholder="New York City..." value="{{user.address}}"
+                 [ngModelOptions]="{standalone:true}">
+        </form>
+        <p class="role">User</p>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar">
+    <h1>
+      About me
+      <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
+    </h1>
+    <h5 class="profile-name">
+      {{user.firstName}} {{user.lastName}}
+    </h5>
+    <h5>
+      {{user.address}}
+    </h5>
+    <button type="submit" (click)="update(user)" class="edit-btn">Edit profile</button>
+  </div>
+</div>

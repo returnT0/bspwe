@@ -15,13 +15,19 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import {JwtModule} from "@auth0/angular-jwt";
 import {HttpInterceptorService} from "./serivce/http-interceptor.service";
+import { DomainsComponent } from './domains/domains.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: '', component: ProfileComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sign-in', component: LoginComponent },
-  { path: 'sign-up', component: RegistrationComponent }
+  { path: 'sign-up', component: RegistrationComponent },
+  { path: 'domains', component: DomainsComponent },
+  { path: 'about', component: AboutComponent },
+  { path: '**', redirectTo: 'home' }
+
 ];
 
 function tokenGetter() {
@@ -36,7 +42,9 @@ function tokenGetter() {
     ProfileComponent,
     HomeComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    DomainsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

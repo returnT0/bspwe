@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 1440px;
+  margin: 0 auto;
+  padding: 7rem 0;
+}
+
+.card {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 400px;
+  height: 200px;
+  padding: 20px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+  }
+
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 400px;
+  text-align: center;
+}
+
+.image {
+}
+
+.image i {
+  font-size: 150px;
+  color: #040403;
+}
+
+.profile-details form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.profile-details form input {
+  text-align: center;
+  border: none;
+  padding: 5px 0;
+  width: 150px;
+}
+
+.lastname,
+.firstname {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.profile-name {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.profile-location {
+  color: #888888;
+  font-size: 16px;
+}
+
+.profile-bio {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+}
+
+h1 {
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.edit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 12px;
+  width: 230px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background-color: #fc2535;
+  color: #ffffff;
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.75);
+  /*border: none;*/
+  cursor: pointer;
+  transition: 0.3s ease-out;
+}
+
+.edit-btn:hover {
+  background-color: #000000;
+  -webkit-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
+  color: #ffffff;
+}
+
+.edit-btn:active {
+  background-color: rgba(0, 0, 0, 0.3);
+}
