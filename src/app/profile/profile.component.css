@@ -6,8 +6,9 @@
   display: flex;
   justify-content: space-evenly;
   width: 1440px;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
   padding: 7rem 0;
+  margin-bottom: 10rem;
 }
 
 .card {
