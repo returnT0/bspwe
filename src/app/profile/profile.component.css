@@ -22,6 +22,8 @@
   font-weight: 600;
   padding-left: 10px;
   color: #5e5dfd;
+  max-width: 400px;
+  overflow: hidden;
 }
 
 .container {

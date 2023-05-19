@@ -6,6 +6,7 @@ import configurl from '../../assets/config.json';
 import {AuthService} from "../serivce/auth.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,7 @@ export class ProfileComponent {
 
   @Output()
   public user: AuthUserDto = new AuthUserDto();
-  
+
   constructor(
     private authService: AuthService,
     private httpClient: HttpClient,
@@ -28,18 +29,30 @@ export class ProfileComponent {
   ) {
   }
 
+  infoForm!: FormGroup;
 
   public ngOnInit() {
     this.getUser();
+
+    const namesRegex = /^((?=\S*?[A-Z])(?=\S*?[a-z]).{2,22})\S$/;
+
+    this.infoForm = new FormGroup({
+      password: new FormControl('', [Validators.required, Validators.pattern(namesRegex)]),
+      confirm: new FormControl('')
+    });
   }
 
   getUser(): void {
-    this.httpClient.get<AuthUserDto>(this.baseUrl + "my-profile")
+    this.httpClient.get<AuthUserDto>(this.baseUrl + "profile")
       .subscribe(response => this.user = response);
   }
 
   public update(user?: AuthUserDto): void {
 
+  }
+
+  public isUserAuthenticated(): boolean {
+    return this.authService.isUserAuthenticated();
   }
 
 }
