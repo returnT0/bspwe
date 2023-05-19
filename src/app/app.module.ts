@@ -19,7 +19,7 @@ import { DomainsComponent } from './domains/domains.component';
 import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
-  { path: '', component: ProfileComponent },
+  { path: '', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sign-in', component: LoginComponent },
