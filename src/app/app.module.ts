@@ -18,7 +18,7 @@ import {HttpInterceptorService} from "./serivce/http-interceptor.service";
 import { DomainsComponent } from './domains/domains.component';
 import { AboutComponent } from './about/about.component';
 import { TableComponent } from './table/table.component';
-import { ItemPageComponent } from './item-page/item-page.component';
+import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'domains', component: DomainsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'table', component: TableComponent },
+  { path: 'details/:id', component: DetailsComponent }
 ];
 
 function tokenGetter() {
@@ -47,7 +48,7 @@ function tokenGetter() {
     DomainsComponent,
     AboutComponent,
     TableComponent,
-    ItemPageComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,
