@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>Table Component</h1>
+
+  <form [formGroup]="newRowForm" (ngSubmit)="addRow()">
+    <div class="form-group">
+      <input formControlName="name" class="form-control" placeholder="Name" />
+      <div *ngIf="newRowForm.get('name')?.invalid && newRowForm.get('name')?.touched" class="text-danger">
+        Name is required.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="newRowForm.invalid">Add Row</button>
+  </form>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let item of tableData; let i = index">
+      <tr *ngIf="selectedRow && selectedRow.id === item.id">
+        <td>{{ item.id }}</td>
+        <td>
+          <input [(ngModel)]="selectedRow.name" class="form-control" />
+        </td>
+        <td>
+          <button class="btn btn-success" (click)="saveRow()">Save</button>
+          <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+          <a [routerLink]="['/details', item.id]" class="btn btn-primary">Open</a>
+        </td>
+      </tr>
+      <tr *ngIf="!selectedRow || selectedRow.id !== item.id">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteRow(item)">Delete</button>
+          <button class="btn btn-primary" (click)="editRow(item)">Edit</button>
+          <a [routerLink]="['/details', item.id]" class="btn btn-primary">Open</a>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
