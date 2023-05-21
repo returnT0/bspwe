@@ -72,8 +72,8 @@ button[type="submit"] {
 }
 
 .add-domain {
-  background-color: rgba(4, 4, 3, 0.1);
-  color: #040403;
+  background-color: #91acff;
+  color: #ffffff;
   border: none;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;

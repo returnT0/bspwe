@@ -2,9 +2,12 @@
   <div class="container">
 
     <div class="form-add">
+      <h1>Users of the "{{ itemName }}" domain</h1>
+
+      <!--      <h2>Element Details: {{ itemId }}</h2>-->
       <form [formGroup]="newRowForm" (ngSubmit)="addRow()" class="form-inline mb-3">
         <div class="form-group">
-          <input formControlName="name" class="form-control mr-2" placeholder="mydomain.xyz"/>
+          <input formControlName="name" class="form-control mr-2" placeholder="full name"/>
         </div>
         <button type="submit" class="add-domain"> &#43;</button>
       </form>
@@ -17,7 +20,7 @@
       <table class="table" style="border-radius: 30px">
         <thead>
         <tr>
-          <th>Domain</th>
+          <th>User</th>
           <th class="action-col">Action</th>
         </tr>
         </thead>
@@ -25,7 +28,13 @@
         <ng-container *ngFor="let item of tableData; let i = index">
           <tr *ngIf="selectedRow && selectedRow.id === item.id">
             <td>
-              <input [(ngModel)]="selectedRow.name" class="form-control" />
+              <input [(ngModel)]="selectedRow.name" class="form-control"/>
+            </td>
+            <td class="buttons">
+              <button class="btn btn-success" (click)="saveRow()"><i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="cancelEdit()"><i class="fa fa-times" aria-hidden="true"></i>
+              </button>
             </td>
           </tr>
           <tr *ngIf="!selectedRow || selectedRow.id !== item.id">
@@ -33,9 +42,8 @@
             <td class="buttons">
               <button class="btn btn-danger" (click)="deleteRow(item)"><i class="fa fa-trash-o" aria-hidden="true"></i>
               </button>
-              <button class="btn btn-primary" [routerLink]="['/users', item.id]"><i class="fa fa-wrench" aria-hidden="true"></i>
+              <button class="btn btn-primary" (click)="editRow(item)"><i class="fa fa-wrench" aria-hidden="true"></i>
               </button>
-              <button [routerLink]="['/details', item.id]" class="btn btn-primary"><i class="fa fa-share" aria-hidden="true"></i></button>
             </td>
           </tr>
         </ng-container>

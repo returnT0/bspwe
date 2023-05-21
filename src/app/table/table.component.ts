@@ -14,12 +14,10 @@ interface TableRow {
 })
 export class TableComponent {
   tableData: TableRow[] = [
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 3, name: 'Item 3' }
+    {id: 1, name: 'Item 1'},
+    {id: 2, name: 'Item 2'},
+    {id: 3, name: 'Item 3'}
   ];
-
-  p: number = 1;
 
   newRowForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required])
@@ -45,27 +43,5 @@ export class TableComponent {
         this.selectedRow = null;
       }
     }
-  }
-
-  editRow(row: TableRow) {
-    this.selectedRow = { ...row };
-  }
-
-  saveRow() {
-    if (this.selectedRow) {
-      const index = this.tableData.findIndex(item => item.id === this.selectedRow!.id);
-      if (index !== -1) {
-        this.tableData[index] = { ...this.selectedRow };
-        this.selectedRow = null;
-      }
-    }
-  }
-
-  cancelEdit() {
-    this.selectedRow = null;
-  }
-
-  openRow(row: TableRow) {
-    this.router.navigate(['/element', row.id]);
   }
 }
