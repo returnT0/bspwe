@@ -1,11 +1,9 @@
 <div class="file-explorer">
-<!--  <div class="makedir">-->
-    <button (click)="addDirectory()" class="makedir-btn"> &#43;</button>
-<!--  </div>-->
+  <button (click)="addDirectory()" class="makedir-btn"> &#43;</button>
   <table class="table">
     <thead class="thead-dark">
     <tr>
-      <th>Name</th>
+      <th>Directory</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -14,29 +12,29 @@
       <tr>
         <td class="table-content">{{ directory.name }}</td>
         <td>
-          <button (click)="toggleDirectory(directory)" class="btn btn-info"><i class="fa fa-list" aria-hidden="true"></i>
+          <button (click)="toggleDirectory(directory)" class="btn btn-info"><i class="fa fa-list"
+                                                                               aria-hidden="true"></i>
           </button>
-          <button (click)="editDirectory(directory)" class="btn btn-secondary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          <button (click)="editDirectory(directory)" class="btn btn-secondary"><i class="fa fa-pencil-square-o"
+                                                                                  aria-hidden="true"></i>
           </button>
-          <button (click)="deleteDirectory(directory)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+          <button (click)="deleteDirectory(directory)" class="btn btn-danger"><i class="fa fa-trash-o"
+                                                                                 aria-hidden="true"></i></button>
         </td>
       </tr>
       <tr *ngIf="directory.open" class="open-dir">
         <td colspan="2">
           <table class="table inner">
-<!--            <thead class="thead-light">-->
-<!--            <tr>-->
-<!--              <th>Name</th>-->
-<!--              <th>Actions</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
             <tbody>
             <ng-container *ngFor="let file of directory.files">
               <tr>
                 <td class="table-content">{{ file.name }}</td>
                 <td>
-                  <button (click)="deleteFile(directory, file)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                  <button (click)="downloadFile(directory, file)" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i>
+                  <button (click)="deleteFile(directory, file)" class="btn btn-danger"><i class="fa fa-trash-o"
+                                                                                          aria-hidden="true"></i>
+                  </button>
+                  <button (click)="downloadFile(directory, file)" class="btn btn-primary"><i class="fa fa-download"
+                                                                                             aria-hidden="true"></i>
                   </button>
                 </td>
               </tr>
@@ -44,7 +42,7 @@
             </tbody>
           </table>
           <button (click)="addFile(directory)" class="add-file">&#43;</button>
-<!--          <button (click)="addDirectory(directory)" class="btn btn-success">Add Directory</button>-->
+          <!--          <button (click)="addDirectory(directory)" class="btn btn-success">Add Directory</button>-->
         </td>
       </tr>
     </ng-container>

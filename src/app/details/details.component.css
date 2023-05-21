@@ -1,5 +1,4 @@
 
-
 .file-explorer {
   display: flex;
   flex-direction: column;
@@ -20,11 +19,14 @@ table {
   text-align: center;
 }
 
-tr:nth-child(even) {background-color: #f8f8f8;}
+tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
 
 .table {
   width: 800px;
 }
+
 /* Table Head Styling */
 
 table {
@@ -36,7 +38,7 @@ table {
   margin-bottom: 0;
 }
 
-.table thead th{
+.table thead th {
   background-color: #f7f7f7;
   color: #040403;
   text-transform: uppercase;
@@ -46,7 +48,9 @@ thead th {
   width: 25%;
 }
 
-tr:nth-child(even) {background-color: #f8f8f8;}
+tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
 
 
 /* Table Body Styling */
@@ -114,8 +118,7 @@ tr:nth-child(even) {background-color: #f8f8f8;}
 .table button.btn-success,
 .table button.btn-info,
 .table button.btn-danger,
-.table button.btn-primary
-{
+.table button.btn-primary {
   background-color: #f7f7f7;
   color: #040403;
   transition: background-color 0.3s ease;
@@ -128,8 +131,7 @@ tr:nth-child(even) {background-color: #f8f8f8;}
 .table button.btn-primary:hover,
 .table button.btn-secondary:hover,
 .table button.btn-info:hover,
-.table button.btn-success:hover
-{
+.table button.btn-success:hover {
   box-shadow: 0 0 5px hsla(0, 0%, 50%, 8);
   background-color: #91acff;
 }

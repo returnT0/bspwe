@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+
 // import {AuthUserDto} from "../profile/profile.component";
 
 interface User {
@@ -17,9 +18,9 @@ export class UsersComponent {
   itemId: number;
   itemName: string;
   tableData: User[] = [
-    { id: 1, name: 'User 1' },
-    { id: 2, name: 'User 2' },
-    { id: 3, name: 'User 3' }
+    {id: 1, name: 'User 1'},
+    {id: 2, name: 'User 2'},
+    {id: 3, name: 'User 3'}
   ];
 
   newRowForm: FormGroup = new FormGroup({
@@ -44,7 +45,7 @@ export class UsersComponent {
   addRow() {
     if (this.newRowForm.valid) {
       const newId = this.tableData.length > 0 ? this.tableData[this.tableData.length - 1].id + 1 : 1;
-      this.tableData.push({ id: newId, name: this.newRowForm.value.name });
+      this.tableData.push({id: newId, name: this.newRowForm.value.name});
       this.newRowForm.reset();
     }
   }
@@ -60,14 +61,14 @@ export class UsersComponent {
   }
 
   editRow(row: User) {
-    this.selectedRow = { ...row };
+    this.selectedRow = {...row};
   }
 
   saveRow() {
     if (this.selectedRow) {
       const index = this.tableData.findIndex(item => item.id === this.selectedRow!.id);
       if (index !== -1) {
-        this.tableData[index] = { ...this.selectedRow };
+        this.tableData[index] = {...this.selectedRow};
         this.selectedRow = null;
       }
     }
@@ -75,4 +76,5 @@ export class UsersComponent {
 
   cancelEdit() {
     this.selectedRow = null;
-  }}
+  }
+}

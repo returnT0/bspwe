@@ -19,8 +19,8 @@ import {HttpInterceptorService} from "./serivce/http-interceptor.service";
 import {AboutComponent} from './about/about.component';
 import {TableComponent} from './table/table.component';
 import {DetailsComponent} from './details/details.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { UsersComponent } from './users/users.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {UsersComponent} from './users/users.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
