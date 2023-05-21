@@ -1,51 +1,52 @@
-<div class="container">
+<div class="main">
+  <div class="container">
 
-  <form [formGroup]="newRowForm" (ngSubmit)="addRow()" class="form-inline mb-3">
-    <div class="form-group">
-      <input formControlName="name" class="form-control mr-2" placeholder="Name" />
+    <div class="form-add">
+      <form [formGroup]="newRowForm" (ngSubmit)="addRow()" class="form-inline mb-3">
+        <div class="form-group">
+          <input formControlName="name" class="form-control mr-2" placeholder="mydomain.xyz"/>
+        </div>
+        <button type="submit" class="add-domain"> &#43;</button>
+      </form>
       <div *ngIf="newRowForm.get('name')?.invalid && newRowForm.get('name')?.touched" class="text-danger">
         Name is required.
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="newRowForm.invalid">Add Row</button>
-  </form>
 
-  <div *ngIf="tableData.length > 0">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Action</th>
-      </tr>
-      </thead>
-      <tbody>
-      <ng-container *ngFor="let item of tableData; let i = index">
-        <tr *ngIf="selectedRow && selectedRow.id === item.id">
-          <td>{{ item.id }}</td>
-          <td>
-            <input [(ngModel)]="selectedRow.name" class="form-control" />
-          </td>
-          <td>
-            <button class="btn btn-success" (click)="saveRow()">Save</button>
-            <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
-            <a [routerLink]="['/details', item.id]" class="btn btn-primary">Open</a>
-          </td>
+    <div *ngIf="tableData.length > 0" class="ng-content table-container">
+      <table class="table" style="border-radius: 30px">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th class="action-col">Action</th>
         </tr>
-        <tr *ngIf="!selectedRow || selectedRow.id !== item.id">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>
-            <button class="btn btn-danger" (click)="deleteRow(item)">Delete</button>
-            <button class="btn btn-primary" (click)="editRow(item)">Edit</button>
-            <a [routerLink]="['/details', item.id]" class="btn btn-primary">Open</a>
-          </td>
-        </tr>
-      </ng-container>
-      </tbody>
-    </table>
-  </div>
-
-  <div *ngIf="tableData.length === 0" class="text-center">
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let item of tableData; let i = index">
+          <tr *ngIf="selectedRow && selectedRow.id === item.id">
+            <td>
+              <input [(ngModel)]="selectedRow.name" class="form-control" />
+            </td>
+            <td class="buttons">
+              <button class="btn btn-success" (click)="saveRow()"><i class="fa fa-check" aria-hidden="true"></i></button>
+              <button class="btn btn-secondary" (click)="cancelEdit()"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+          <tr *ngIf="!selectedRow || selectedRow.id !== item.id">
+            <td>{{ item.name }}</td>
+            <td class="buttons">
+              <button class="btn btn-danger" (click)="deleteRow(item)"><i class="fa fa-trash-o" aria-hidden="true"></i>
+              </button>
+              <button class="btn btn-primary" (click)="editRow(item)"><i class="fa fa-wrench" aria-hidden="true"></i>
+              </button>
+              <button [routerLink]="['/details', item.id]" class="btn btn-primary"><i class="fa fa-share" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="tableData.length === 0" class="text-center">
+    </div>
   </div>
 </div>

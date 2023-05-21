@@ -20,6 +20,7 @@ import {DomainsComponent} from './domains/domains.component';
 import {AboutComponent} from './about/about.component';
 import {TableComponent} from './table/table.component';
 import {DetailsComponent} from './details/details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -62,6 +63,7 @@ function tokenGetter() {
     NgbModule,
     NgFor, DecimalPipe,
     NgOptimizedImage,
+    NgxPaginationModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -69,6 +71,7 @@ function tokenGetter() {
         disallowedRoutes: []
       }
     })
+
   ],
   providers: [
     {

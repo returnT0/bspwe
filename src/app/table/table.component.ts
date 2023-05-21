@@ -19,6 +19,8 @@ export class TableComponent {
     { id: 3, name: 'Item 3' }
   ];
 
+  p: number = 1;
+
   newRowForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required])
   });
