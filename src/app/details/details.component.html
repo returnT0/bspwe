@@ -1,97 +1,48 @@
-<div class="container">
-  <h1>Details Component</h1>
-
-  <h2>Element Details: {{ itemId }}</h2>
-
-  <h3>Users</h3>
-  <form (ngSubmit)="addUser()">
-    <div class="form-group">
-      <input [(ngModel)]="newUser.name" class="form-control" placeholder="User Name" required />
-      <button type="submit" class="btn btn-primary">Add User</button>
-    </div>
-  </form>
-
-  <table class="table">
+<div class="file-explorer">
+  <table>
     <thead>
     <tr>
-      <th>ID</th>
       <th>Name</th>
-      <th>Action</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.id }}</td>
-      <td>
-        <ng-container *ngIf="selectedUser && selectedUser.id === user.id">
-          <input [(ngModel)]="selectedUser.name" class="form-control" required />
-        </ng-container>
-        <ng-container *ngIf="!selectedUser || selectedUser.id !== user.id">
-          {{ user.name }}
-        </ng-container>
-      </td>
-      <td>
-        <ng-container *ngIf="!selectedUser || selectedUser.id !== user.id">
-          <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
-          <button class="btn btn-primary" (click)="editUser(user)">Edit</button>
-        </ng-container>
-        <ng-container *ngIf="selectedUser && selectedUser.id === user.id">
-          <button class="btn btn-success" (click)="saveUser()">Save</button>
-          <button class="btn btn-secondary" (click)="cancelUserEdit()">Cancel</button>
-        </ng-container>
-      </td>
-    </tr>
+    <ng-container *ngFor="let directory of directories">
+      <tr>
+        <td>{{ directory.name }}</td>
+        <td>
+          <button (click)="toggleDirectory(directory)">Open/Close</button>
+          <button (click)="editDirectory(directory)">Edit</button>
+          <button (click)="deleteDirectory(directory)">Delete</button>
+        </td>
+      </tr>
+      <tr *ngIf="directory.open">
+        <td colspan="2">
+          <table>
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let file of directory.files">
+              <tr>
+                <td>{{ file.name }}</td>
+                <td>
+                  <button (click)="deleteFile(directory, file)">Delete</button>
+                  <button (click)="downloadFile(directory, file)">Download</button>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+          <button (click)="addFile(directory)">Add File</button>
+          <button (click)="addDirectory(directory)">Add Directory</button>
+        </td>
+      </tr>
+    </ng-container>
     </tbody>
   </table>
-
-  <h3>Media Files</h3>
-  <form (ngSubmit)="addMediaFile()">
-    <div class="form-group">
-      <input [(ngModel)]="newMediaFile.name" class="form-control" placeholder="File Name" required />
-      <input type="file" (change)="handleFileChange($event)" accept="image/*, video/*" />
-      <button type="submit" class="btn btn-primary">Add File</button>
-    </div>
-  </form>
-
-  <table class="table">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>File</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let file of mediaFiles">
-      <td>{{ file.id }}</td>
-      <td>
-        <ng-container *ngIf="selectedMediaFile && selectedMediaFile.id === file.id">
-          <input [(ngModel)]="selectedMediaFile.name" class="form-control" required />
-        </ng-container>
-        <ng-container *ngIf="!selectedMediaFile || selectedMediaFile.id !== file.id">
-          {{ file.name }}
-        </ng-container>
-      </td>
-      <td>
-        <ng-container *ngIf="!selectedMediaFile || selectedMediaFile.id !== file.id">
-          {{ file.file ? file.file.name : '' }}
-        </ng-container>
-        <ng-container *ngIf="selectedMediaFile && selectedMediaFile.id === file.id">
-          <input type="file" (change)="handleFileChange($event)" accept="image/*, video/*" />
-        </ng-container>
-      </td>
-      <td>
-        <ng-container *ngIf="!selectedMediaFile || selectedMediaFile.id !== file.id">
-          <button class="btn btn-danger" (click)="deleteMediaFile(file.id)">Delete</button>
-          <button class="btn btn-primary" (click)="editMediaFile(file)">Edit</button>
-        </ng-container>
-        <ng-container *ngIf="selectedMediaFile && selectedMediaFile.id === file.id">
-          <button class="btn btn-success" (click)="saveMediaFile()">Save</button>
-          <button class="btn btn-secondary" (click)="cancelMediaFileEdit()">Cancel</button>
-        </ng-container>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <button (click)="addDirectory()">Add Root Directory</button>
 </div>

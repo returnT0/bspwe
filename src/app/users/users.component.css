@@ -1,0 +1,214 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 57vh;
+  margin-bottom: 5.5rem;
+}
+
+.container {
+  margin-top: 20px;
+  width: 1440px;
+}
+
+.text-center {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.form-add {
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+
+form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 350px;
+  margin-right: -50px;
+}
+
+.form-group input {
+  height: 50px;
+  font-size: 20px;
+  box-shadow: 0 0 5px hsla(0, 0%, 50%, 0.6);
+  border-radius: 25px;
+  text-align: justify;
+}
+
+form input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  /*border-color: transparent !important;*/
+  border: 3px solid #fc2535;
+  color: #040403;
+}
+
+button[type="submit"] {
+  height: 49px;
+  width: 50px;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 25px;
+}
+
+.add-domain {
+  background-color: #f92634;
+  color: #ffffff;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 5px hsla(0, 0%, 50%, 0.6);
+}
+
+.add-domain:hover {
+  background-color: #040403;
+}
+
+/* Table Styling */
+.ng-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.table {
+  width: 50%;
+  border-collapse: collapse;
+  font-family: Poppins, sans-serif;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Table Head Styling */
+
+table {
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 0 5px hsla(0, 0%, 50%, 0.6);
+}
+
+.table thead th{
+  background-color: #f7f7f7;
+  color: #040403;
+  text-transform: uppercase;
+}
+
+thead th {
+  width: 25%;
+}
+
+tr:nth-child(even) {background-color: #f8f8f8;}
+
+/* Table Body Styling */
+.table tbody td {
+  align-content: center;
+  padding: 15px;
+  border-bottom: none;
+}
+
+/* Selected Row Styling */
+.table tbody tr.selected-row {
+  background-color: #f9f9f9;
+}
+
+/* Input Field Styling */
+.table input {
+  width: 100%;
+  padding: 5px;
+}
+
+/* Button Styling */
+.table button,
+.table a.btn {
+  display: inline-block;
+  padding: 8px 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.table button {
+  border: none;
+  background-color: transparent;
+  border-radius: 25px;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 0 5px hsla(0, 0%, 50%, 0.6);
+  transition: background-color, color 0.3s ease;
+}
+
+.table button:hover,
+.table a.btn:hover {
+  background-color: #f9f9f9;
+}
+
+/* Button Colors */
+.table button.btn-success {
+  background-color: #040403;
+  color: #fff;
+}
+
+.table button.btn-secondary {
+  background-color: #fc2535;
+  color: #fff;
+}
+
+.table button.btn-danger {
+  background-color: #fc2535;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.table button.btn-danger:hover {
+  background-color: #040403;
+  /*color: #d21b00;*/
+}
+
+
+.table button.btn-primary {
+  background-color: #f7f7f7;
+  color: #040403;
+}
+
+.table button.btn-primary:hover {
+  background-color: #f7f7f7;
+  color: #fc2535;
+}
+
+/* Button Margins */
+.table button + button,
+.table a.btn + button {
+  margin-left: 5px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 1rem;
+
+}

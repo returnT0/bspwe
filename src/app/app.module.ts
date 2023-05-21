@@ -20,6 +20,7 @@ import {AboutComponent} from './about/about.component';
 import {TableComponent} from './table/table.component';
 import {DetailsComponent} from './details/details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path: 'sign-up', component: RegistrationComponent},
   {path: 'about', component: AboutComponent},
   {path: 'table', component: TableComponent},
-  {path: 'details/:id', component: DetailsComponent}
+  {path: 'details/:id', component: DetailsComponent},
+  {path: 'users/:id', component: UsersComponent},
 ];
 
 function tokenGetter() {
@@ -48,7 +50,7 @@ function tokenGetter() {
     AboutComponent,
     TableComponent,
     DetailsComponent,
-
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
