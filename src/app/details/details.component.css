@@ -110,48 +110,28 @@ tr:nth-child(even) {background-color: #f8f8f8;}
   box-shadow: 0 0 5px hsla(0, 0%, 50%, 0.6);
 }
 
-.table button:hover,
-.table a.btn:hover {
-  /*background-color: #f9f9f9;*/
-}
-
-.table button.btn-success {
-  background-color: #040403;
-  color: #fff;
-}
-
-.table button.btn-secondary {
+.table button.btn-secondary,
+.table button.btn-success,
+.table button.btn-info,
+.table button.btn-danger,
+.table button.btn-primary
+{
   background-color: #f7f7f7;
   color: #040403;
-}
-
-.table button.btn-secondary:hover {
-  box-shadow: 0 0 5px hsla(0, 0%, 50%, 1);
-}
-
-.table button.btn-info:hover {
-  box-shadow: 0 0 5px hsla(0, 0%, 50%, 1);
-}
-
-.table button.btn-danger {
-  background-color: #fc2535;
-  color: #fff;
   transition: background-color 0.3s ease;
 }
 
 .table button.btn-danger:hover {
-  background-color: #040403;
-  /*color: #d21b00;*/
+  background-color: rgba(252, 37, 53, 0.4);
 }
 
-
-.table button.btn-primary {
-  background-color: #f7f7f7;
-  color: #040403;
-}
-
-.table button.btn-primary:hover {
-  box-shadow: 0 0 5px hsla(0, 0%, 50%, 1);
+.table button.btn-primary:hover,
+.table button.btn-secondary:hover,
+.table button.btn-info:hover,
+.table button.btn-success:hover
+{
+  box-shadow: 0 0 5px hsla(0, 0%, 50%, 8);
+  background-color: #91acff;
 }
 
 /* Button Margins */
@@ -170,24 +150,25 @@ tr:nth-child(even) {background-color: #f8f8f8;}
 
 .add-file {
   font-size: 18px;
-  color: #ffffff;
+  color: #949494;
   font-weight: bold;
-  background: rgba(252, 37, 53, 0.5);
+  background-color: rgba(4, 4, 3, 0.1);
   width: 715px;
-  height: 30px;
+  height: 40px;
   border: none;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
-  padding-top: 0;
+  padding-top: -0.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 0 5px hsla(0, 0%, 50%, 0.2);
 
 }
 
 .add-file:hover {
-  height: 40px;
+  height: 50px;
   padding-top: 0.5rem;
-  background: rgba(252, 37, 53, 0.8);
+  background-color: rgba(145, 172, 255, 0.7);
+  color: #ffffff;
 }
 
 
@@ -196,7 +177,7 @@ tr:nth-child(even) {background-color: #f8f8f8;}
   font-size: 22px;
   color: #ffffff;
   font-weight: bold;
-  background: rgba(252, 37, 53, 0.8);
+  background-color: rgba(4, 4, 3, 0.2);
   width: 800px;
   height: 70px;
   margin-bottom: -40px;
@@ -213,7 +194,7 @@ tr:nth-child(even) {background-color: #f8f8f8;}
 }
 
 .makedir-btn:hover {
-  background: rgba(252, 37, 53, 0.5);
+  background: rgba(252, 37, 53, 0.9);
   margin-bottom: -30px;
   padding-bottom: 1.8rem;
 }
