@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthUserDto} from "../profile/profile.component";
+// import {AuthUserDto} from "../profile/profile.component";
 
 interface User {
   id: number;
@@ -17,9 +17,9 @@ export class UsersComponent {
   itemId: number;
   itemName: string;
   tableData: User[] = [
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 3, name: 'Item 3' }
+    { id: 1, name: 'User 1' },
+    { id: 2, name: 'User 2' },
+    { id: 3, name: 'User 3' }
   ];
 
   newRowForm: FormGroup = new FormGroup({

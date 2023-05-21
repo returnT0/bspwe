@@ -18,7 +18,13 @@ interface Directory {
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent {
-  directories: Directory[] = [];
+  directories: Directory[] = [
+    { name: 'Documents', open: false, files: [{ name: 'Document 1', type: 'doc' }, { name: 'Document 2', type: 'doc' }] },
+    { name: 'Downloads', open: false, files: [{ name: 'Download 1', type: 'file' }, { name: 'Download 2', type: 'file' }] },
+    { name: 'Pictures', open: false, files: [{ name: 'Picture 1', type: 'jpg' }, { name: 'Picture 2', type: 'jpg' }] },
+    { name: 'Music', open: false, files: [{ name: 'Song 1', type: 'mp3' }, { name: 'Song 2', type: 'mp3' }] },
+    { name: 'Videos', open: false, files: [{ name: 'Video 1', type: 'mp4' }, { name: 'Video 2', type: 'mp4' }] }
+  ];
 
   toggleDirectory(directory: Directory): void {
     directory.open = !directory.open;
@@ -62,16 +68,19 @@ export class DetailsComponent {
       };
 
       if (parentDirectory) {
-        if (!parentDirectory.directories) {
-          parentDirectory.directories = [];
-        }
+        parentDirectory.directories = parentDirectory.directories || [];
         parentDirectory.directories.push(newDirectory);
       } else {
-        this.directories.push(newDirectory);
+        const rootDirectory: Directory = {
+          name: name,
+          open: false,
+          files: [],
+          directories: [newDirectory]
+        };
+        this.directories.push(rootDirectory);
       }
     }
   }
-
 
   addFile(directory: Directory): void {
     const fileInput = document.createElement('input');
@@ -104,6 +113,6 @@ export class DetailsComponent {
 
   downloadFile(directory: Directory, file: File): void {
     // Logic to download the file
-    console.log('Downloading file:', directory.name + '/' + file.name);
+    console.log('Downloading file:', `${directory.name}/${file.name}`);
   }
 }
