@@ -10,4 +10,5 @@ export class NavMenuComponent {
   public logout = () => {
   }
 
+
 }
