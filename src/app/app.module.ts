@@ -16,7 +16,6 @@ import {LoginComponent} from './login/login.component';
 import {JwtModule} from "@auth0/angular-jwt";
 import {AuthService} from "./serivce/auth.service";
 import {HttpInterceptorService} from "./serivce/http-interceptor.service";
-import {DomainsComponent} from './domains/domains.component';
 import {AboutComponent} from './about/about.component';
 import {TableComponent} from './table/table.component';
 import {DetailsComponent} from './details/details.component';
@@ -28,7 +27,6 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'sign-in', component: LoginComponent},
   {path: 'sign-up', component: RegistrationComponent},
-  {path: 'domains', component: DomainsComponent},
   {path: 'about', component: AboutComponent},
   {path: 'table', component: TableComponent},
   {path: 'details/:id', component: DetailsComponent}
@@ -47,7 +45,6 @@ function tokenGetter() {
     HomeComponent,
     RegistrationComponent,
     LoginComponent,
-    DomainsComponent,
     AboutComponent,
     TableComponent,
     DetailsComponent,
