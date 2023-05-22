@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from "../serivce/auth.service";
 
 interface File {
   name: string;
@@ -19,12 +21,18 @@ interface Directory {
 })
 export class DetailsComponent {
   directories: Directory[] = [
-    { name: 'Documents', open: false, files: [{ name: 'Document 1', type: 'doc' }, { name: 'Document 2', type: 'doc' }] },
-    { name: 'Downloads', open: false, files: [{ name: 'Download 1', type: 'file' }, { name: 'Download 2', type: 'file' }] },
-    { name: 'Pictures', open: false, files: [{ name: 'Picture 1', type: 'jpg' }, { name: 'Picture 2', type: 'jpg' }] },
-    { name: 'Music', open: false, files: [{ name: 'Song 1', type: 'mp3' }, { name: 'Song 2', type: 'mp3' }] },
-    { name: 'Videos', open: false, files: [{ name: 'Video 1', type: 'mp4' }, { name: 'Video 2', type: 'mp4' }] }
+    {name: 'Documents', open: false, files: [{name: 'Document 1', type: 'doc'}, {name: 'Document 2', type: 'doc'}]},
+    {name: 'Downloads', open: false, files: [{name: 'Download 1', type: 'file'}, {name: 'Download 2', type: 'file'}]},
+    {name: 'Pictures', open: false, files: [{name: 'Picture 1', type: 'jpg'}, {name: 'Picture 2', type: 'jpg'}]},
+    {name: 'Music', open: false, files: [{name: 'Song 1', type: 'mp3'}, {name: 'Song 2', type: 'mp3'}]},
+    {name: 'Videos', open: false, files: [{name: 'Video 1', type: 'mp4'}, {name: 'Video 2', type: 'mp4'}]}
   ];
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   toggleDirectory(directory: Directory): void {
     directory.open = !directory.open;
@@ -114,5 +122,9 @@ export class DetailsComponent {
   downloadFile(directory: Directory, file: File): void {
     // Logic to download the file
     console.log('Downloading file:', `${directory.name}/${file.name}`);
+  }
+
+  isUserAuthenticated() {
+    return this.authService.isUserAuthenticated();
   }
 }

@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import {AuthService} from "../serivce/auth.service";
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,8 +8,13 @@ import {Component} from '@angular/core';
 })
 export class NavMenuComponent {
 
-  public logout = () => {
+  constructor(
+    private authService: AuthService
+  ) {
   }
 
+  public logout = () => {
+    this.authService.logout();
+  }
 
 }

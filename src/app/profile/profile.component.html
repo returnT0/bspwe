@@ -1,52 +1,57 @@
-<div>
-  <div class="body">
-    <div class="label">
-      <h5 class="profile-name">
-        {{user.firstName}} {{user.lastName}}
-      </h5>
-    </div>
-    <div class="container">
-      <div class="card">
-        <div class="profile">
-          <div class="image">
-            <img src="../../assets/images/control-07-walk.webp" alt="">
-          </div>
-          <div class="profile-details">
-            <form [formGroup]="infoForm" autocomplete="off" novalidate>
-              <div class="names">
-                <input type="text" [(ngModel)]="user.firstName"
-                       class="form-control firstname" id="userFirstName"
-                       placeholder="firstname" value="{{user.firstName}}" [ngModelOptions]="{standalone:true}">
-                <input type="text" [(ngModel)]="user.lastName" class="form-control lastname"
-                       id="userLastName" placeholder="surname" value="{{user.lastName}}"
+<div *ngIf="!isUserAuthenticated()">
+  <app-login></app-login>
+</div>
+<div *ngIf="isUserAuthenticated()">
+  <div>
+    <div class="body">
+      <div class="label">
+        <h5 class="profile-name">
+          {{user.firstName}} {{user.lastName}}
+        </h5>
+      </div>
+      <div class="container">
+        <div class="card">
+          <div class="profile">
+            <div class="image">
+              <img src="../../assets/images/control-07-walk.webp" alt="">
+            </div>
+            <div class="profile-details">
+              <form [formGroup]="infoForm" autocomplete="off" novalidate>
+                <div class="names">
+                  <input type="text" [(ngModel)]="user.firstName"
+                         class="form-control firstname" id="userFirstName"
+                         placeholder="firstname" value="{{user.firstName}}" [ngModelOptions]="{standalone:true}">
+                  <input type="text" [(ngModel)]="user.lastName" class="form-control lastname"
+                         id="userLastName" placeholder="surname" value="{{user.lastName}}"
+                         [ngModelOptions]="{standalone:true}">
+                </div>
+                <input type="text" [(ngModel)]="user.address" class="form-control"
+                       id="userAddress" placeholder="adddress" value="{{user.address}}"
                        [ngModelOptions]="{standalone:true}">
-              </div>
-              <input type="text" [(ngModel)]="user.address" class="form-control"
-                     id="userAddress" placeholder="adddress" value="{{user.address}}"
-                     [ngModelOptions]="{standalone:true}">
-              <input type="text" [(ngModel)]="user.role" class="form-control"
-                     id="userRole" placeholder="role" value="{{user.role}}"
-                     [ngModelOptions]="{standalone:true}">
-            </form>
-            <!--            <p class="role">{{user.role}}</p>-->
+                <input type="text" [(ngModel)]="user.role" class="form-control"
+                       id="userRole" placeholder="role" value="{{user.role}}"
+                       [ngModelOptions]="{standalone:true}">
+              </form>
+              <!--            <p class="role">{{user.role}}</p>-->
+            </div>
           </div>
         </div>
+        <!--      <div class="sidebar">-->
+        <!--        <h1>-->
+        <!--          About me-->
+        <!--          <i class="fa fa-hand-peace-o" aria-hidden="true"></i>-->
+        <!--        </h1>-->
+        <!--        &lt;!&ndash;        <h5 class="profile-name">&ndash;&gt;-->
+        <!--        &lt;!&ndash;          {{user.firstName}} {{user.lastName}}&ndash;&gt;-->
+        <!--        &lt;!&ndash;        </h5>&ndash;&gt;-->
+        <!--        <h5>-->
+        <!--          {{user.address}}-->
+        <!--        </h5>-->
+        <!--      </div>-->
       </div>
-      <!--      <div class="sidebar">-->
-      <!--        <h1>-->
-      <!--          About me-->
-      <!--          <i class="fa fa-hand-peace-o" aria-hidden="true"></i>-->
-      <!--        </h1>-->
-      <!--        &lt;!&ndash;        <h5 class="profile-name">&ndash;&gt;-->
-      <!--        &lt;!&ndash;          {{user.firstName}} {{user.lastName}}&ndash;&gt;-->
-      <!--        &lt;!&ndash;        </h5>&ndash;&gt;-->
-      <!--        <h5>-->
-      <!--          {{user.address}}-->
-      <!--        </h5>-->
-      <!--      </div>-->
-    </div>
-    <div class="div-btn">
-      <button type="submit" (click)="update(user)" class="edit-btn">Edit profile</button>
+      <div class="div-btn">
+        <button type="submit" (click)="update(user)" class="edit-btn">Edit profile</button>
+      </div>
     </div>
   </div>
 </div>

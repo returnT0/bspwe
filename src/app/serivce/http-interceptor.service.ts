@@ -17,17 +17,25 @@ export class HttpInterceptorService {
     let token = sessionStorage.getItem("app.token");
     if (token) {
       req = req.clone({
-        url: `http://localhost:8087/${req.url}`,
+        url: `http://localhost:8080/${req.url}`,
         setHeaders: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
         },
       });
     } else {
       req = req.clone({
-        url: `http://localhost:8087/${req.url}`,
+        url: `http://localhost:8080/${req.url}`,
         setHeaders: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
         }
       });
     }
@@ -39,7 +47,7 @@ export class HttpInterceptorService {
 
   private handleErrorRes(error: HttpErrorResponse): Observable<never> {
     if (error.status === 401) {
-      this.router.navigateByUrl("/login", { replaceUrl: true });
+      this.router.navigateByUrl("/sign-in", { replaceUrl: true });
     }
     return throwError(() => error);
   }}

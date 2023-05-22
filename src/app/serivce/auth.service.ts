@@ -23,7 +23,7 @@ export class AuthService {
       },
       responseType: 'text' as 'text',
     };
-    return this.http.post("api/auth/sign-in", loginForm , httpOptions);
+    return this.http.post("auth/sign-in", loginForm , httpOptions);
   }
 
   isUserAuthenticated(): boolean {

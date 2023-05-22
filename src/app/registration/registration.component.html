@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <h1 class="card-title mb-4">Sign Up</h1>
-    <form (ngSubmit)="registerUser(registerForm.value)" [formGroup]="registerForm" autocomplete="off" novalidate>
+    <form (ngSubmit)="signUp(registrationForm.value)" [formGroup]="registrationForm" autocomplete="off" novalidate>
       <div class="mb-3 row">
         <label class="col-form-label col-sm-2" for="firstName">First Name</label>
         <div class="col-md-5">
@@ -15,14 +15,14 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <label class="col-form-label col-sm-2" for="email">Email</label>
+        <label class="col-form-label col-sm-2" for="username">Username</label>
         <div class="col-md-5">
-          <input class="form-control" formControlName="email" id="email" type="email"/>
+          <input class="form-control" formControlName="username" id="username" type="email"/>
         </div>
         <div class="col-md-5">
-          <em *ngIf="validateControl('email') && hasError('email', 'email')">
-            Please provide a valid email</em>
-          <em *ngIf="validateControl('email') && hasError('email', 'required')">
+          <!--          <em *ngIf="validateControl('email') && hasError('email', 'email')">-->
+          <!--            Please provide a valid email</em>-->
+          <em *ngIf="validateControl('username') && hasError('username', 'required')">
             Email is required</em>
         </div>
       </div>
@@ -45,9 +45,10 @@
       <br>
       <div class="mb-3 row">
         <div class="col-md-1">
-          <button [disabled]="!registerForm.valid" class="btn btn-success" type="submit">Submit</button>
+          <button [disabled]="!registrationForm.valid" class="btn btn-success" type="submit">Submit</button>
         </div>
-        <p class="login-p">Already have an account? <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/sign-in']"
+        <p class="login-p">Already have an account? <a [routerLinkActiveOptions]="{exact: true}"
+                                                       [routerLink]="['/sign-in']"
                                                        class="login-link"
                                                        routerLinkActive="active">Sign in</a>
         </p>

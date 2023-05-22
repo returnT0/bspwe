@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from "../serivce/auth.service";
 
 interface TableRow {
   id: number;
@@ -25,7 +26,9 @@ export class TableComponent {
 
   selectedRow: TableRow | null = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService) {}
 
   addRow() {
     if (this.newRowForm.valid) {
@@ -44,4 +47,9 @@ export class TableComponent {
       }
     }
   }
+
+  isUserAuthenticated() {
+    return this.authService.isUserAuthenticated();
+  }
+
 }

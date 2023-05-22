@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Router} from "@angular/router";
-import {NgForm} from '@angular/forms';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import { Component, Output } from '@angular/core';
+import { Router } from "@angular/router";
+import { FormGroup, NgForm } from '@angular/forms';
+import jwtDecode, { JwtPayload } from "jwt-decode";
+import { JwtHelperService } from '@auth0/angular-jwt';
+import {AuthService} from "../serivce/auth.service";
 
 export interface LoginFormDto {
   username: string,
   password: string
 }
-
 
 @Component({
   selector: 'app-login',
@@ -17,44 +17,55 @@ export interface LoginFormDto {
 })
 export class LoginComponent {
 
-  invalidLogin?: boolean;
-  url = "https://localhost:44379/api/auth/";
+  @Output()
+  public invalidLogin?: boolean;
+  loginForm: FormGroup | undefined;
+  showError: boolean | undefined;
 
   constructor(
     private router: Router,
-    private http: HttpClient,
-    private jwtHelper: JwtHelperService,
+    private authService: AuthService,
+    private jwtHelper: JwtHelperService
   ) {
   }
 
-  public login = (form: NgForm) => {
-    this.router.navigate(["profile"]);
-    // const credentials = JSON.stringify(form.value);
-    // this.http.post(this.url + "login", credentials, {
-    //   headers: new HttpHeaders({
-    //     "Content-Type": "application/json"
-    //   })
-    // }).subscribe(response => {
-    //   const token = (<any>response).token;
-    //   localStorage.setItem("jwt", token);
-    //   this.invalidLogin = false;
-    //   this.router.navigate(["profile"]);
-    // }, err => {
-    //   this.invalidLogin = true;
-    //   setTimeout(() => {
-    //     this.invalidLogin = false;
-    //   }, 2000);
-    // });
+  public login(loginForm: NgForm): void {
+    const values = loginForm.value as any;
+    this.showError = false;
 
+    const loginFormDto: LoginFormDto = {
+      username: values.username,
+      password: values.password
+    }
+    sessionStorage.removeItem("app.token");
+    this.authService.login(loginFormDto)
+      .subscribe({
+        next: (token) => {
+          sessionStorage.setItem("app.token", token);
+          const decodedToken = jwtDecode<JwtPayload>(token);
+          if (typeof decodedToken.aud === "string") {
+            sessionStorage.setItem("app.roles", decodedToken.aud);
+          }
+          //todo: add domain resolution
+          this.invalidLogin = false;
+          this.router.navigateByUrl("/home");
+        },
+        error: (error) => {
+          this.invalidLogin = true;
+          console.error(`Login failed: ${error.status}`, "OK")
+        }
+      });
   }
 
   isUserAuthenticated() {
-    const token = localStorage.getItem("jwt");
-    if (token && !this.jwtHelper.isTokenExpired(token)) {
-      return true;
-    } else {
-      return false;
-    }
+    const token = sessionStorage.getItem("jwt");
+    return !!(token && !this.jwtHelper.isTokenExpired(token));
   }
+
+}
+
+export interface LoginFormDto {
+  username: string,
+  password: string
 }
 
