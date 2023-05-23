@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FtpElementService } from './ftp-element.service';
+import { FileService } from './file.service';
 
 describe('FtpElementService', () => {
-  let service: FtpElementService;
+  let service: FileService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FtpElementService);
+    service = TestBed.inject(FileService);
   });
 
   it('should be created', () => {

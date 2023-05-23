@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Domain } from "../../table/table.component";
+import { Domain } from "../../table/domain.component";
 import { HttpClient } from "@angular/common/http";
 import {Observable} from "rxjs";
 
@@ -32,7 +32,7 @@ export class DomainService {
 }
 
 export interface CreateDomainDto {
-  name: string;
+  domainName: string;
 }
 
 export interface Member {

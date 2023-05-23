@@ -16,7 +16,7 @@ import {LoginComponent} from './login/login.component';
 import {JwtModule} from "@auth0/angular-jwt";
 import {HttpInterceptorService} from "./serivce/http-interceptor.service";
 import {AboutComponent} from './about/about.component';
-import {TableComponent} from './table/table.component';
+import {DomainComponent} from './table/domain.component';
 import {DetailsComponent} from './details/details.component';
 import {UsersComponent} from './users/users.component';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -29,11 +29,11 @@ const routes: Routes = [
   {path: 'sign-in', component: LoginComponent},
   {path: 'sign-up', component: RegistrationComponent},
   {path: 'about', component: AboutComponent},
-  {path: 'table', component: TableComponent},
+  {path: 'table', component: DomainComponent},
   {path: 'details/:id', component: DetailsComponent},
   {path: 'users/:id', component: UsersComponent},
   {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
-  {path: 'table', component: TableComponent, canActivate: [AuthGuard]},
+  {path: 'table', component: DomainComponent, canActivate: [AuthGuard]},
   {path: 'details/:id', component: DetailsComponent, canActivate: [AuthGuard]}
 ];
 
@@ -51,7 +51,7 @@ function tokenGetter() {
     RegistrationComponent,
     LoginComponent,
     AboutComponent,
-    TableComponent,
+    DomainComponent,
     DetailsComponent,
     UsersComponent
   ],
