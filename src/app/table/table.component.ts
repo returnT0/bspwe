@@ -3,18 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from "../serivce/auth.service";
 
-interface TableRow {
-  id: number;
-  name: string;
-}
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
 export class TableComponent {
-  tableData: TableRow[] = [
+  tableData: Domain[] = [
     {id: 1, name: 'Item 1'},
     {id: 2, name: 'Item 2'},
     {id: 3, name: 'Item 3'}
@@ -24,7 +19,7 @@ export class TableComponent {
     name: new FormControl('', [Validators.required])
   });
 
-  selectedRow: TableRow | null = null;
+  selectedRow: Domain | null = null;
 
   constructor(
     private router: Router,
@@ -38,7 +33,7 @@ export class TableComponent {
     }
   }
 
-  deleteRow(row: TableRow) {
+  deleteRow(row: Domain) {
     const index = this.tableData.findIndex(item => item.id === row.id);
     if (index !== -1) {
       this.tableData.splice(index, 1);
@@ -52,4 +47,9 @@ export class TableComponent {
     return this.authService.isUserAuthenticated();
   }
 
+}
+
+export interface Domain {
+  id: number;
+  name: string;
 }

@@ -32,7 +32,7 @@ export class DetailsComponent {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
   toggleDirectory(directory: Directory): void {
     directory.open = !directory.open;
