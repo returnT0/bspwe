@@ -14,9 +14,9 @@ export class FtpElementService {
   ) {
   }
 
-  public listDirectory(path: string): FtpFile[] {
-    return this.httpClient().get
-  }
+  // public listDirectory(path: string): FtpFile[] {
+  //   return this.httpClient().get
+  // }
 
   public addDomain(dto: CreateDomainDto): Observable<Domain[]> {
     return this.httpClient.post<Domain[]>('/domain/create', dto);
