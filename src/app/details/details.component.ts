@@ -1,17 +1,11 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from "../serivce/auth.service";
+import { Component } from '@angular/core';
 
-interface File {
+interface CustomFile {
   name: string;
-  type: string;
-}
-
-interface Directory {
-  name: string;
-  open: boolean;
-  files: File[];
-  directories?: Directory[];
+  type: 'file' | 'folder';
+  children?: CustomFile[];
+  content?: File;
+  isRenaming?: boolean;
 }
 
 @Component({
@@ -20,111 +14,149 @@ interface Directory {
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent {
-  directories: Directory[] = [
-    {name: 'Documents', open: false, files: [{name: 'Document 1', type: 'doc'}, {name: 'Document 2', type: 'doc'}]},
-    {name: 'Downloads', open: false, files: [{name: 'Download 1', type: 'file'}, {name: 'Download 2', type: 'file'}]},
-    {name: 'Pictures', open: false, files: [{name: 'Picture 1', type: 'jpg'}, {name: 'Picture 2', type: 'jpg'}]},
-    {name: 'Music', open: false, files: [{name: 'Song 1', type: 'mp3'}, {name: 'Song 2', type: 'mp3'}]},
-    {name: 'Videos', open: false, files: [{name: 'Video 1', type: 'mp4'}, {name: 'Video 2', type: 'mp4'}]}
-  ];
+  rootFolder: CustomFile = {
+    name: 'root',
+    type: 'folder',
+    children: [
+      {
+        name: 'folder1',
+        type: 'folder',
+        children: [
+          { name: 'file1.txt', type: 'file' },
+          { name: 'file2.txt', type: 'file' },
+        ]
+      },
+      {
+        name: 'folder2',
+        type: 'folder',
+        children: [
+          {
+            name: 'subfolder1',
+            type: 'folder',
+            children: [
+              { name: 'file3.txt', type: 'file' },
+            ]
+          },
+          { name: 'file4.txt', type: 'file' },
+        ]
+      },
+    ]
+  };
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
-  ) {}
+  newFolderName: string = '';
+  newName: string = '';
+  currentFolder: CustomFile | null = this.rootFolder;
+  currentPath: string[] = [];
 
-  toggleDirectory(directory: Directory): void {
-    directory.open = !directory.open;
-  }
-
-  editDirectory(directory: Directory): void {
-    const newName = prompt('Enter new name for the directory:');
-    if (newName) {
-      directory.name = newName;
+  navigateToFolder(folder: CustomFile): void {
+    if (folder.type === 'folder') {
+      this.currentPath.push(folder.name);
+      this.currentFolder = folder;
     }
   }
 
-  deleteDirectory(directory: Directory): void {
-    const confirmation = confirm('Are you sure you want to delete this directory?');
-    if (confirmation) {
-      this.removeDirectory(directory, this.directories);
+  navigateUp(): void {
+    if (this.currentPath.length > 0 && this.currentFolder) {
+      this.currentPath.pop();
+      this.currentFolder = this.getParentFolder(this.currentPath);
     }
   }
 
-  removeDirectory(directory: Directory, directories: Directory[]): void {
-    const index = directories.indexOf(directory);
-    if (index !== -1) {
-      directories.splice(index, 1);
-    } else {
-      for (const subDirectory of directories) {
-        if (subDirectory.directories) {
-          this.removeDirectory(directory, subDirectory.directories);
-        }
-      }
-    }
-  }
-
-  addDirectory(parentDirectory?: Directory): void {
-    const name = prompt('Enter name for the new directory:');
-    if (name) {
-      const newDirectory: Directory = {
-        name: name,
-        open: false,
-        files: [],
-        directories: []
-      };
-
-      if (parentDirectory) {
-        parentDirectory.directories = parentDirectory.directories || [];
-        parentDirectory.directories.push(newDirectory);
+  getParentFolder(path: string[]): CustomFile | null {
+    let currentFolder = this.rootFolder;
+    for (const folderName of path) {
+      const folder = currentFolder.children?.find(file => file.name === folderName);
+      if (folder && folder.type === 'folder' && folder.children) {
+        currentFolder = folder;
       } else {
-        const rootDirectory: Directory = {
-          name: name,
-          open: false,
-          files: [],
-          directories: [newDirectory]
+        return null; // Invalid path
+      }
+    }
+    return currentFolder;
+  }
+
+  addFolder(): void {
+    if (this.currentFolder && this.newFolderName) {
+      const isDuplicate = this.currentFolder.children?.some(child => child.name === this.newFolderName);
+      if (!isDuplicate) {
+        const newFolder: CustomFile = {
+          name: this.newFolderName,
+          type: 'folder',
+          children: []
         };
-        this.directories.push(rootDirectory);
-      }
-    }
-  }
-
-  addFile(directory: Directory): void {
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = 'image/*, audio/*, video/*';
-    fileInput.addEventListener('change', (event: any) => {
-      const files = event.target.files;
-      if (files && files.length > 0) {
-        for (const file of files) {
-          const newFile: File = {
-            name: file.name,
-            type: file.type
-          };
-          directory.files.push(newFile);
+        if (!this.currentFolder.children) {
+          this.currentFolder.children = [];
         }
-      }
-    });
-    fileInput.click();
-  }
-
-  deleteFile(directory: Directory, file: File): void {
-    const confirmation = confirm('Are you sure you want to delete this file?');
-    if (confirmation) {
-      const index = directory.files.indexOf(file);
-      if (index !== -1) {
-        directory.files.splice(index, 1);
+        this.currentFolder.children.push(newFolder);
+        this.newFolderName = ''; // Clear the input field after adding the folder
+      } else {
+        // Handle duplicate folder name error
+        alert('A folder with the same name already exists.');
       }
     }
   }
 
-  downloadFile(directory: Directory, file: File): void {
-    // Logic to download the file
-    console.log('Downloading file:', `${directory.name}/${file.name}`);
+  deleteFile(file: CustomFile): void {
+    if (this.currentFolder && this.currentFolder.children) {
+      const index = this.currentFolder.children.findIndex(child => child.name === file.name && child.type === file.type);
+      if (index !== -1) {
+        this.currentFolder.children.splice(index, 1);
+      }
+    }
   }
 
-  isUserAuthenticated() {
-    return this.authService.isUserAuthenticated();
+  startRenaming(file: CustomFile): void {
+    file.isRenaming = true;
+    this.newName = file.name;
+  }
+
+  finishRenaming(file: CustomFile): void {
+    if (this.newName.trim() && file.name !== this.newName) {
+      const isDuplicate = this.currentFolder?.children?.some(child => child.name === this.newName);
+      if (!isDuplicate) {
+        file.name = this.newName;
+      } else {
+        // Handle duplicate file/folder name error
+        alert('A file/folder with the same name already exists.');
+      }
+    }
+    file.isRenaming = false;
+  }
+
+  downloadFile(file: CustomFile): void {
+    if (file.type === 'file' && file.content) {
+      const url = window.URL.createObjectURL(file.content);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = file.name;
+      link.click();
+      window.URL.revokeObjectURL(url);
+    }
+  }
+
+  getFileIconClass(file: CustomFile): string {
+    return file.type === 'folder' ? 'folder-icon' : 'file-icon';
+  }
+
+  onFileUpload(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    if (file && this.currentFolder) {
+      const isDuplicate = this.currentFolder.children?.some(child => child.name === file.name);
+      if (!isDuplicate) {
+        const newFile: CustomFile = {
+          name: file.name,
+          type: 'file',
+          content: file
+        };
+        if (!this.currentFolder.children) {
+          this.currentFolder.children = [];
+        }
+        this.currentFolder.children.push(newFile);
+      } else {
+        // Handle duplicate file name error
+        alert('A file with the same name already exists.');
+      }
+    }
   }
 }
