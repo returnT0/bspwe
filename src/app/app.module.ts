@@ -15,7 +15,7 @@ import {RegistrationComponent} from './registration/registration.component';
 import {LoginComponent} from './login/login.component';
 import {JwtModule} from "@auth0/angular-jwt";
 import {HttpInterceptorService} from "./serivce/http-interceptor.service";
-import {AboutComponent} from './about/about.component';
+import {PricingComponent} from './pricing/pricing.component';
 import {TableComponent} from './table/table.component';
 import {DetailsComponent} from './details/details.component';
 import {UsersComponent} from './users/users.component';
@@ -28,11 +28,11 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'sign-in', component: LoginComponent},
   {path: 'sign-up', component: RegistrationComponent},
-  {path: 'about', component: AboutComponent},
+  {path: 'pricing', component: PricingComponent},
   {path: 'table', component: TableComponent},
   {path: 'details/:id', component: DetailsComponent},
   {path: 'users/:id', component: UsersComponent},
-  {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
+  {path: 'pricing', component: PricingComponent, canActivate: [AuthGuard]},
   {path: 'table', component: TableComponent, canActivate: [AuthGuard]},
   {path: 'details/:id', component: DetailsComponent, canActivate: [AuthGuard]}
 ];
@@ -50,7 +50,7 @@ function tokenGetter() {
     HomeComponent,
     RegistrationComponent,
     LoginComponent,
-    AboutComponent,
+    PricingComponent,
     TableComponent,
     DetailsComponent,
     UsersComponent
