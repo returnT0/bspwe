@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from "../serivce/auth.service";
 
 interface CustomFile {
   name: string;
@@ -47,6 +49,12 @@ export class DetailsComponent {
   newName: string = '';
   currentFolder: CustomFile | null = this.rootFolder;
   currentPath: string[] = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   navigateToFolder(folder: CustomFile): void {
     if (folder.type === 'folder') {
@@ -158,5 +166,8 @@ export class DetailsComponent {
         alert('A file with the same name already exists.');
       }
     }
+  }
+  isUserAuthenticated() {
+    return this.authService.isUserAuthenticated();
   }
 }

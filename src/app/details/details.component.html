@@ -1,48 +1,54 @@
-<div class="main">
-  <div class="up">
-    <button (click)="navigateUp()" [disabled]="currentPath.length === 0">Go Up</button>
-  </div>
-  <div class="file-browser">
-    <div class="add-form">
-      <input type="text" [(ngModel)]="newFolderName" placeholder="New Folder Name">
-      <button (click)="addFolder()">Add Folder</button>
+<div *ngIf="!isUserAuthenticated()">
+  <app-login></app-login>
+</div>
+<div *ngIf="isUserAuthenticated()">
+  <div class="main">
+    <div class="up">
+      <button (click)="navigateUp()" [disabled]="currentPath.length === 0">Go Up</button>
     </div>
-    <div class="path">
+    <div class="file-browser">
+      <div class="add-form">
+        <input type="text" [(ngModel)]="newFolderName" placeholder="New Folder Name">
+        <button (click)="addFolder()">Add Folder</button>
+      </div>
+      <div class="path">
       <span class="current-path" *ngIf="currentPath.length > 0">
         /{{ currentPath.join('/') }}
       </span>
-    </div>
-    <table>
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <ng-container *ngFor="let file of currentFolder?.children">
+      </div>
+      <table>
+        <thead>
         <tr>
-          <td>
-            <span [class]="getFileIconClass(file)"></span>
-            <input *ngIf="file.isRenaming" type="text" [(ngModel)]="newName"
-                   (blur)="finishRenaming(file)" (keyup.enter)="finishRenaming(file)">
-            <span *ngIf="!file.isRenaming" (click)="navigateToFolder(file)">{{ file.name }}</span>
-          </td>
-          <td>
-            <button *ngIf="file.type === 'file'" (click)="downloadFile(file)">Download</button>
-            <button (click)="deleteFile(file)">Delete</button>
-            <button (click)="startRenaming(file)">Rename</button>
-          </td>
+          <th>Name</th>
+          <th>Actions</th>
         </tr>
-      </ng-container>
-      </tbody>
-    </table>
-    <div class="input-browser">
-      <label class="drop-container">
-        <span class="drop-title">Drop files here</span>
-        or
-        <input type="file" (change)="onFileUpload($event)"/>
-      </label>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let file of currentFolder?.children">
+          <tr>
+            <td>
+              <span [class]="getFileIconClass(file)"></span>
+              <input *ngIf="file.isRenaming" type="text" [(ngModel)]="newName"
+                     (blur)="finishRenaming(file)" (keyup.enter)="finishRenaming(file)">
+              <span *ngIf="!file.isRenaming" (click)="navigateToFolder(file)">{{ file.name }}</span>
+            </td>
+            <td>
+              <button *ngIf="file.type === 'file'" (click)="downloadFile(file)">Download</button>
+              <button (click)="deleteFile(file)">Delete</button>
+              <button (click)="startRenaming(file)">Rename</button>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+      <div class="input-browser">
+        <label class="drop-container">
+          <span class="drop-title">Drop files here</span>
+          or
+          <input type="file" (change)="onFileUpload($event)"/>
+        </label>
+      </div>
     </div>
   </div>
 </div>
+```
