@@ -53,7 +53,7 @@ function tokenGetter() {
     AboutComponent,
     TableComponent,
     DetailsComponent,
-    UsersComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
