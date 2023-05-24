@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from "../serivce/auth.service";
-import {FileService} from "../serivce/ftp-element/file.service";
+import {FileService, FileUploadDto} from "../serivce/ftp-element/file.service";
+import {map, switchMap} from "rxjs";
 
 export interface FolderElement {
   name: string;
@@ -17,33 +18,11 @@ export interface FolderElement {
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
-  rootFolder: FolderElement = {
-    name: 'root',
-    type: 'folder',
-    children: [
-      {
-        name: 'folder1',
-        type: 'folder',
-        children: [
-          { name: 'file1.txt', type: 'file' },
-          { name: 'file2.txt', type: 'file' },
-        ]
-      },
-      {
-        name: 'folder2',
-        type: 'folder',
-        children: [
-          {
-            name: 'subfolder1',
-            type: 'folder',
-            children: [
-              { name: 'file3.txt', type: 'file' },
-            ]
-          },
-          { name: 'file4.txt', type: 'file' },
-        ]
-      },
-    ]
+  rootFolder: FolderElement =
+    {
+      name: 'root',
+      type: 'folder',
+      children: []
   };
 
   newFolderName: string = '';
@@ -51,6 +30,8 @@ export class DetailsComponent implements OnInit {
   currentFolder: FolderElement | null = this.rootFolder;
   currentPath: string[] = [];
   domainId?: number;
+
+  downloadFileObject?: Blob;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,9 +44,7 @@ export class DetailsComponent implements OnInit {
     this.domainId = this.route.snapshot.params['id'];
 
     this.fileService.listDirectory('', this.domainId)
-                    .subscribe({
-                      next: (value) => this.rootFolder = value
-                    })
+                    .pipe(map((value: FolderElement) => { this.rootFolder = value; return value; })).subscribe()
   }
 
   navigateToFolder(folder: FolderElement): void {
@@ -148,14 +127,17 @@ export class DetailsComponent implements OnInit {
   }
 
   downloadFile(file: FolderElement): void {
-    if (file.type === 'file' && file.content) {
-      const url = window.URL.createObjectURL(file.content);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = file.name;
-      link.click();
-      window.URL.revokeObjectURL(url);
-    }
+    this.fileService.downloadFile(file.name, this.currentPath.join('/'), this.domainId)
+                    .pipe(map(data => {
+                      if (file.type === 'file' && file.content) {
+                        const url = window.URL.createObjectURL(data);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = file.name;
+                        link.click();
+                        window.URL.revokeObjectURL(url);
+                      }
+                    }));
   }
 
   getFileIconClass(file: FolderElement): string {
@@ -176,6 +158,13 @@ export class DetailsComponent implements OnInit {
         if (!this.currentFolder.children) {
           this.currentFolder.children = [];
         }
+        const dto: FileUploadDto = {
+          fileName: file.name,
+          path: this.currentPath.join('/'),
+          domainId: this.domainId,
+          data: file
+        }
+        this.fileService.uploadFile(dto).subscribe();
         this.currentFolder.children.push(newFile);
       } else {
         // Handle duplicate file name error

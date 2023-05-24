@@ -18,11 +18,11 @@ export class FileService {
   }
 
   public uploadFile(body: FileUploadDto): Observable<FolderElement> {
-    return this.httpClient.post<FolderElement>('file/upload', JSON.stringify(body));
+    return this.httpClient.post<FolderElement>('file/upload', body);
   }
 
-  public downloadFile(fileName: string, path: string, domainId?: number): Observable<File> {
-    return this.httpClient.get<File>(
+  public downloadFile(fileName: string, path: string, domainId?: number): Observable<any> {
+    return this.httpClient.get<Blob>(
       'file/download?name=' + fileName + '&path=' + path + '&domainId=' + domainId
     );
   }
@@ -49,7 +49,7 @@ export class FileService {
 
 export interface FileUploadDto {
   fileName: string;
-  file: File;
+  data: File;
   path: string;
-  domainId: number;
+  domainId?: number;
 }
