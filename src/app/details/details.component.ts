@@ -60,9 +60,7 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe({
-      next: value => this.domainId = Number(value.get('id'))
-    });
+    this.domainId = this.route.snapshot.params['id'];
 
     this.fileService.listDirectory('', this.domainId)
                     .subscribe({
