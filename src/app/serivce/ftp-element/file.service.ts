@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpRequest} from "@angular/common/http";
 import { Observable } from "rxjs";
 import {FolderElement} from "../../details/details.component";
 
@@ -17,10 +17,14 @@ export class FileService {
     return this.httpClient.get<FolderElement>('file/list?path=' + path + '&domainId=' + domainId);
   }
 
-  public uploadFile(body: FileUploadDto): Observable<FolderElement> {
-    return this.httpClient.post<FolderElement>(
-      'file/upload?domainId=' + body.domainId + '&path=' + body.path + '&fileName=' + body.fileName,
-      body.data);
+  public uploadFile(body: FileUploadDto): Observable<any> {
+    const req = new HttpRequest(
+      'POST',
+      'file/upload?domainId=' + body.domainId + '&path=' + body.path + '&fileName=' + body.fileName, body.data, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.httpClient.request(req);
   }
 
   public downloadFile(fileName: string, path: string, domainId?: number): Observable<any> {
