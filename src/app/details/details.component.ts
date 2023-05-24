@@ -44,7 +44,9 @@ export class DetailsComponent implements OnInit {
     this.domainId = this.route.snapshot.params['id'];
 
     this.fileService.listDirectory('', this.domainId)
-                    .pipe(map((value: FolderElement) => { this.rootFolder = value; return value; })).subscribe()
+                    .pipe(map((value: FolderElement) => {
+                      this.currentFolder = value;
+                    })).subscribe()
   }
 
   navigateToFolder(folder: FolderElement): void {
