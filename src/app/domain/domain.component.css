@@ -64,15 +64,15 @@ form input:focus {
 }
 
 button[type="submit"] {
-  height: 49px;
-  width: 50px;
+  height: 51px;
+  width: 51px;
   font-size: 25px;
   font-weight: bold;
   border-radius: 25px;
 }
 
 .add-domain {
-  background-color: rgba(4, 4, 3, 0.1);
+  background-color: rgb(224, 224, 224);
   color: #040403;
   border: none;
   transition: all 0.3s ease-in-out;
@@ -82,7 +82,8 @@ button[type="submit"] {
 }
 
 .add-domain:hover {
-  background-color: rgba(4, 4, 3, 0.2);
+  background-color: #fc2535;
+  color: #f7f7f7;
 }
 
 /* Table Styling */

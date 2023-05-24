@@ -1,9 +1,18 @@
 import {Component, OnInit, Output} from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { AuthService } from "../serivce/auth.service";
 import {CreateDomainDto, DomainService} from "../serivce/domain/domain.service";
+
+function domainNameValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value;
+  if (!value) {
+    return null;
+  }
+  const isValid = /^(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.+(?!-)[A-Za-z0-9-]{2,63}(?<!-)$/.test(value);
+  return isValid ? null : { domainName: { valid: false }};
+}
 
 @Component({
   selector: 'app-domain',
@@ -18,7 +27,7 @@ export class DomainComponent implements OnInit {
   selectedRow: Domain | null = null;
 
   newRowForm: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required])
+    name: new FormControl('', [Validators.required, domainNameValidator])
   });
 
   constructor(
@@ -28,8 +37,13 @@ export class DomainComponent implements OnInit {
 
   ngOnInit(): void {
     this.domainService.getAll()
-                      .pipe(switchMap(value => this.tableData = value))
-                      .subscribe()
+      .pipe(switchMap(value => this.tableData = value))
+      .subscribe();
+  }
+
+  isDomainNameInvalid() {
+    const domainNameField = this.newRowForm.get('name');
+    return domainNameField?.invalid && (domainNameField?.touched || domainNameField?.dirty);
   }
 
   addRow() {
@@ -38,8 +52,8 @@ export class DomainComponent implements OnInit {
         domainName: this.newRowForm.value.name
       };
       this.domainService.addDomain(dto)
-                        .pipe(switchMap(value => this.tableData = value))
-                        .subscribe()
+        .pipe(switchMap(value => this.tableData = value))
+        .subscribe();
     }
   }
 
@@ -56,7 +70,6 @@ export class DomainComponent implements OnInit {
   isUserAuthenticated() {
     return this.authService.isUserAuthenticated();
   }
-
 }
 
 export interface Domain {

@@ -12,8 +12,8 @@
           </div>
           <button type="submit" class="add-domain"> &#43;</button>
         </form>
-        <div *ngIf="newRowForm.get('name')?.invalid && newRowForm.get('name')?.touched" class="text-danger">
-          Name is required.
+        <div *ngIf="isDomainNameInvalid()" class="text-danger">
+          Invalid domain name.
         </div>
       </div>
 
@@ -35,9 +35,9 @@
             <tr *ngIf="!selectedRow || selectedRow.id !== item.id">
               <td>{{ item.name }}</td>
               <td class="buttons">
-                <button class="btn btn-danger" (click)="deleteRow(item)"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i>
-                </button>
+<!--                <button class="btn btn-danger" (click)="deleteRow(item)"><i class="fa fa-trash-o"-->
+<!--                                                                            aria-hidden="true"></i>-->
+<!--                </button>-->
                 <button class="btn btn-primary" [routerLink]="['/users', item.id]"><i class="fa fa-wrench"
                                                                                       aria-hidden="true"></i>
                 </button>
