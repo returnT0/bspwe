@@ -35,7 +35,7 @@ export class FileService {
 
   public createDirectory(directoryName: string, path: string, domainId?: number): Observable<FolderElement> {
     return this.httpClient.get<FolderElement>(
-      'file/make-dir?name=' + directoryName + '&path=' + path + '&domainId' + domainId
+      'file/make-dir?name=' + directoryName + '&path=' + path + '&domainId=' + domainId
     );
   }
 
