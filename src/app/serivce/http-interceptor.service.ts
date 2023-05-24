@@ -16,7 +16,7 @@ export class HttpInterceptorService {
 
     let token = sessionStorage.getItem("app.token");
     if (token) {
-      const contentType = req.url.startsWith('file/upload') ? 'multipart/form' : 'application/json'
+      const contentType = req.url.startsWith('file/upload') ? 'multipart/form-data' : 'application/json'
       req = req.clone({
         url: `http://localhost:8080/${req.url}`,
         setHeaders: {
