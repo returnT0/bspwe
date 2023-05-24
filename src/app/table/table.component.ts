@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from "../serivce/auth.service";
+import {DomainService} from "./domain.service";
 
 @Component({
   selector: 'app-table',
@@ -23,7 +24,13 @@ export class TableComponent {
 
   constructor(
     private router: Router,
+    private domainService: DomainService,
     private authService: AuthService) {}
+
+  selectRow(row: Domain) {
+    this.domainService.changeDomainName(row.name);
+    this.router.navigate(['/users', row.id]);
+  }
 
   addRow() {
     if (this.newRowForm.valid) {

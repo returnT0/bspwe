@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {DomainService} from "../table/domain.service";
 
 // import {AuthUserDto} from "../profile/profile.component";
 
@@ -29,7 +30,7 @@ export class UsersComponent {
 
   selectedRow: User | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private domainService: DomainService) {
     this.itemId = 0;
     this.itemName = '';
   }
@@ -37,9 +38,10 @@ export class UsersComponent {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.itemId = Number(params['id']);
-      this.itemName = params['name'];
       // Fetch users and media files for the itemId from the API or any other data source
     });
+
+    this.domainService.currentDomainName.subscribe(domainName => this.itemName = domainName);
   }
 
   addRow() {

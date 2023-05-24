@@ -30,7 +30,6 @@ const routes: Routes = [
   {path: 'sign-up', component: RegistrationComponent},
   {path: 'pricing', component: PricingComponent},
   {path: 'table', component: TableComponent},
-  {path: 'details/:id', component: DetailsComponent},
   {path: 'users/:id', component: UsersComponent},
   {path: 'pricing', component: PricingComponent, canActivate: [AuthGuard]},
   {path: 'table', component: TableComponent, canActivate: [AuthGuard]},
