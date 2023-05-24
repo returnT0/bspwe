@@ -18,7 +18,9 @@ export class FileService {
   }
 
   public uploadFile(body: FileUploadDto): Observable<FolderElement> {
-    return this.httpClient.post<FolderElement>('file/upload', body);
+    return this.httpClient.post<FolderElement>(
+      'file/upload?domainId=' + body.domainId + '&path=' + body.path + '&fileName=' + body.fileName,
+      body.data);
   }
 
   public downloadFile(fileName: string, path: string, domainId?: number): Observable<any> {
