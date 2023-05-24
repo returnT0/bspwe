@@ -20,7 +20,6 @@ export class HttpInterceptorService {
         url: `http://localhost:8080/${req.url}`,
         setHeaders: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Headers': 'Content-Type',
@@ -31,7 +30,6 @@ export class HttpInterceptorService {
       req = req.clone({
         url: `http://localhost:8080/${req.url}`,
         setHeaders: {
-          'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Headers': 'Content-Type',
