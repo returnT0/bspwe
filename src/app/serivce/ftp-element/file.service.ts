@@ -29,7 +29,7 @@ export class FileService {
 
   public downloadFile(fileName: string, path: string, domainId?: number): Observable<any> {
     return this.httpClient.get<Blob>(
-      'file/download?name=' + fileName + '&path=' + path + '&domainId=' + domainId
+      'file/download?fileName=' + fileName + '&path=' + path + '&domainId=' + domainId
     );
   }
 
