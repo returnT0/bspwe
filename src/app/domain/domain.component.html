@@ -35,9 +35,9 @@
             <tr *ngIf="!selectedRow || selectedRow.id !== item.id">
               <td>{{ item.name }}</td>
               <td class="buttons">
-                <button class="btn btn-danger" (click)="deleteRow(item)"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i>
-                </button>
+<!--                <button class="btn btn-danger" (click)="deleteRow(item)"><i class="fa fa-trash-o"-->
+<!--                                                                            aria-hidden="true"></i>-->
+<!--                </button>-->
                 <button class="btn btn-primary" [routerLink]="['/users', item.id]"><i class="fa fa-wrench"
                                                                                       aria-hidden="true"></i>
                 </button>

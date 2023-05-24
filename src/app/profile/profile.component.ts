@@ -61,6 +61,5 @@ export class AuthUserDto {
   id?: number;
   firstName?: string;
   lastName?: string;
-  address?: string;
-  role?: string;
+  username?: string;
 }
