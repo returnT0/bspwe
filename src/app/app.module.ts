@@ -30,8 +30,8 @@ const routes: Routes = [
   {path: 'sign-up', component: RegistrationComponent},
   {path: 'table', component: DomainComponent},
   {path: 'pricing', component: PricingComponent},
-  {path: 'details/:id', component: DetailsComponent},
   {path: 'users/:id', component: UsersComponent},
+  {path: 'details/:id', component: DetailsComponent},
   {path: 'details/:id', component: DetailsComponent, canActivate: [AuthGuard]}
 ];
 
