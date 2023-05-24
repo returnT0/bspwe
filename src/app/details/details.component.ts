@@ -89,9 +89,8 @@ export class DetailsComponent implements OnInit {
           this.currentFolder.children = [];
         }
         this.currentFolder.children.push(newFolder);
+        this.fileService.createDirectory(this.newFolderName, this.currentPath.join('/'), this.domainId).subscribe();
         this.newFolderName = ''; // Clear the input field after adding the folder
-        this.fileService.createDirectory(this.newFolderName, this.currentPath.join('/'), this.domainId)
-                        .subscribe();
       } else {
         // Handle duplicate folder name error
         alert('A folder with the same name already exists.');
