@@ -1,6 +1,5 @@
 import {Component, Output} from '@angular/core';
-//FIXME: import configurl from '../../assets/config.json';
-// ATTENTION: nejebu kak sdelat import configurl bez ts-ignore i oshibki
+//FIXME: import configurl
 // @ts-ignore
 import configurl from '../../assets/config.json';
 import {AuthService} from "../serivce/auth.service";
@@ -15,7 +14,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class ProfileComponent {
 
-  //FIXME: "/api/authentication/"
   private readonly baseUrl: string = configurl.apiServer.url + "/api/authentication/"
 
   @Output()
