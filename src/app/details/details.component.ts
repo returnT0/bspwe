@@ -139,7 +139,7 @@ export class DetailsComponent implements OnInit {
                         link.click();
                         window.URL.revokeObjectURL(url);
                       }
-                    }));
+                    })).subscribe();
   }
 
   getFileIconClass(file: FolderElement): string {
