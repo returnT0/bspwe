@@ -1,17 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { AuthService } from "../serivce/auth.service";
 import {CreateDomainDto, DomainService} from "../serivce/domain/domain.service";
 
 @Component({
-  selector: 'app-table',
+  selector: 'app-domain',
   templateUrl: './domain.component.html',
   styleUrls: ['./domain.component.css']
 })
 export class DomainComponent implements OnInit {
 
+  @Output()
   tableData: Domain[] = [];
+
   selectedRow: Domain | null = null;
 
   newRowForm: FormGroup = new FormGroup({
@@ -25,10 +28,8 @@ export class DomainComponent implements OnInit {
 
   ngOnInit(): void {
     this.domainService.getAll()
-                      .subscribe({
-                        next: value => this.tableData = value,
-                        error: err =>  console.error(err)
-                      })
+                      .pipe(switchMap(value => this.tableData = value))
+                      .subscribe()
   }
 
   addRow() {
@@ -37,10 +38,8 @@ export class DomainComponent implements OnInit {
         domainName: this.newRowForm.value.name
       };
       this.domainService.addDomain(dto)
-                        .subscribe({
-                          next: value => this.tableData = value,
-                          error: err => console.error(err)
-                        })
+                        .pipe(switchMap(value => this.tableData = value))
+                        .subscribe()
     }
   }
 

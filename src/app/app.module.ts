@@ -16,7 +16,7 @@ import {LoginComponent} from './login/login.component';
 import {JwtModule} from "@auth0/angular-jwt";
 import {HttpInterceptorService} from "./serivce/http-interceptor.service";
 import {PricingComponent} from './pricing/pricing.component';
-import {DomainComponent} from './table/domain.component';
+import {DomainComponent} from './domain/domain.component';
 import {DetailsComponent} from './details/details.component';
 import {UsersComponent} from './users/users.component';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -49,7 +49,8 @@ function tokenGetter() {
     RegistrationComponent,
     LoginComponent,
     DetailsComponent,
-    UsersComponent
+    UsersComponent,
+    DomainComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from "../serivce/auth.service";
+import {FileService} from "../serivce/ftp-element/file.service";
 
-interface CustomFile {
+export interface FolderElement {
   name: string;
   type: 'file' | 'folder';
-  children?: CustomFile[];
+  children?: FolderElement[];
   content?: File;
   isRenaming?: boolean;
 }
@@ -15,8 +16,8 @@ interface CustomFile {
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
-export class DetailsComponent {
-  rootFolder: CustomFile = {
+export class DetailsComponent implements OnInit {
+  rootFolder: FolderElement = {
     name: 'root',
     type: 'folder',
     children: [
@@ -47,16 +48,29 @@ export class DetailsComponent {
 
   newFolderName: string = '';
   newName: string = '';
-  currentFolder: CustomFile | null = this.rootFolder;
+  currentFolder: FolderElement | null = this.rootFolder;
   currentPath: string[] = [];
+  domainId?: number;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private fileService: FileService
   ) {}
 
-  navigateToFolder(folder: CustomFile): void {
+  ngOnInit(): void {
+    this.route.paramMap.subscribe({
+      next: value => this.domainId = Number(value.get('id'))
+    });
+
+    this.fileService.listDirectory('', this.domainId)
+                    .subscribe({
+                      next: (value) => this.rootFolder = value
+                    })
+  }
+
+  navigateToFolder(folder: FolderElement): void {
     if (folder.type === 'folder') {
       this.currentPath.push(folder.name);
       this.currentFolder = folder;
@@ -70,7 +84,7 @@ export class DetailsComponent {
     }
   }
 
-  getParentFolder(path: string[]): CustomFile | null {
+  getParentFolder(path: string[]): FolderElement | null {
     let currentFolder = this.rootFolder;
     for (const folderName of path) {
       const folder = currentFolder.children?.find(file => file.name === folderName);
@@ -87,7 +101,7 @@ export class DetailsComponent {
     if (this.currentFolder && this.newFolderName) {
       const isDuplicate = this.currentFolder.children?.some(child => child.name === this.newFolderName);
       if (!isDuplicate) {
-        const newFolder: CustomFile = {
+        const newFolder: FolderElement = {
           name: this.newFolderName,
           type: 'folder',
           children: []
@@ -97,6 +111,8 @@ export class DetailsComponent {
         }
         this.currentFolder.children.push(newFolder);
         this.newFolderName = ''; // Clear the input field after adding the folder
+        this.fileService.createDirectory(this.newFolderName, this.currentPath.join('/'), this.domainId)
+                        .subscribe();
       } else {
         // Handle duplicate folder name error
         alert('A folder with the same name already exists.');
@@ -104,21 +120,23 @@ export class DetailsComponent {
     }
   }
 
-  deleteFile(file: CustomFile): void {
+  deleteFile(file: FolderElement): void {
+    // this.fileService.deleteFile(file.name, this.currentFolder)
     if (this.currentFolder && this.currentFolder.children) {
       const index = this.currentFolder.children.findIndex(child => child.name === file.name && child.type === file.type);
       if (index !== -1) {
         this.currentFolder.children.splice(index, 1);
       }
+      this.fileService.deleteFile(file.name, this.currentPath.join('/'), this.domainId);
     }
   }
 
-  startRenaming(file: CustomFile): void {
+  startRenaming(file: FolderElement): void {
     file.isRenaming = true;
     this.newName = file.name;
   }
 
-  finishRenaming(file: CustomFile): void {
+  finishRenaming(file: FolderElement): void {
     if (this.newName.trim() && file.name !== this.newName) {
       const isDuplicate = this.currentFolder?.children?.some(child => child.name === this.newName);
       if (!isDuplicate) {
@@ -131,7 +149,7 @@ export class DetailsComponent {
     file.isRenaming = false;
   }
 
-  downloadFile(file: CustomFile): void {
+  downloadFile(file: FolderElement): void {
     if (file.type === 'file' && file.content) {
       const url = window.URL.createObjectURL(file.content);
       const link = document.createElement('a');
@@ -142,7 +160,7 @@ export class DetailsComponent {
     }
   }
 
-  getFileIconClass(file: CustomFile): string {
+  getFileIconClass(file: FolderElement): string {
     return file.type === 'folder' ? 'folder-icon' : 'file-icon';
   }
 
@@ -152,7 +170,7 @@ export class DetailsComponent {
     if (file && this.currentFolder) {
       const isDuplicate = this.currentFolder.children?.some(child => child.name === file.name);
       if (!isDuplicate) {
-        const newFile: CustomFile = {
+        const newFile: FolderElement = {
           name: file.name,
           type: 'file',
           content: file
@@ -167,7 +185,13 @@ export class DetailsComponent {
       }
     }
   }
+
   isUserAuthenticated() {
     return this.authService.isUserAuthenticated();
   }
+
+  private loadChildren() {
+    this.fileService.listDirectory(this.currentPath.join('/'), this.domainId);
+  }
+
 }
