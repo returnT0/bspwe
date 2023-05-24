@@ -12,8 +12,8 @@
           </div>
           <button type="submit" class="add-domain"> &#43;</button>
         </form>
-        <div *ngIf="newRowForm.get('name')?.invalid && newRowForm.get('name')?.touched" class="text-danger">
-          Name is required.
+        <div *ngIf="isDomainNameInvalid()" class="text-danger">
+          Invalid domain name.
         </div>
       </div>
 
