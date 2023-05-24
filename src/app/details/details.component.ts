@@ -158,11 +158,14 @@ export class DetailsComponent implements OnInit {
         if (!this.currentFolder.children) {
           this.currentFolder.children = [];
         }
+        const formData: FormData = new FormData();
+        formData.append('file', file);
+
         const dto: FileUploadDto = {
           fileName: file.name,
           path: this.currentPath.join('/'),
           domainId: this.domainId,
-          data: file
+          data: formData
         }
         this.fileService.uploadFile(dto).subscribe();
         this.currentFolder.children.push(newFile);

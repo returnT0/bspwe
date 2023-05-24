@@ -51,7 +51,7 @@ export class FileService {
 
 export interface FileUploadDto {
   fileName: string;
-  data: File;
+  data: FormData;
   path: string;
   domainId?: number;
 }
