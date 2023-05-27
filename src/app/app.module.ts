@@ -17,10 +17,10 @@ import {JwtModule} from "@auth0/angular-jwt";
 import {HttpInterceptorService} from "./serivce/http-interceptor.service";
 import {PricingComponent} from './pricing/pricing.component';
 import {DomainComponent} from './domain/domain.component';
-import {DetailsComponent} from './details/details.component';
 import {UsersComponent} from './users/users.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {AuthGuard} from "./guard/auth.guard";
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -31,8 +31,9 @@ const routes: Routes = [
   {path: 'table', component: DomainComponent},
   {path: 'pricing', component: PricingComponent},
   {path: 'users/:id', component: UsersComponent},
-  {path: 'details/:id', component: DetailsComponent},
-  {path: 'details/:id', component: DetailsComponent, canActivate: [AuthGuard]}
+  // {path: 'details/:id', component: DetailsComponent},
+  // {path: 'details/:id', component: DetailsComponent, canActivate: [AuthGuard]}
+  {path: '**', component: ErrorComponent},
 ];
 
 function tokenGetter() {
@@ -48,9 +49,9 @@ function tokenGetter() {
     HomeComponent,
     RegistrationComponent,
     LoginComponent,
-    DetailsComponent,
     UsersComponent,
-    DomainComponent
+    DomainComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
