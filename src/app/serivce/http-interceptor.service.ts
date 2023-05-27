@@ -16,17 +16,30 @@ export class HttpInterceptorService {
 
     let token = sessionStorage.getItem("app.token");
     if (token) {
+      if(req.url.startsWith('file/upload')) {
       req = req.clone({
         url: `http://localhost:8080/${req.url}`,
         setHeaders: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Headers': 'Content-Type',
           'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
-        },
+        }
       });
+      } else {
+        req = req.clone({
+          url: `http://localhost:8080/${req.url}`,
+          setHeaders: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': 'true',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+          }
+        });
+      }
     } else {
       req = req.clone({
         url: `http://localhost:8080/${req.url}`,
